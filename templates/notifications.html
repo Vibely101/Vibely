@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %} - Notifications{% endblock %}
+{% block content %}
+<div class="card" style="margin-top:22px">
+  <h1>Notifications</h1>
+
+  {% for n in notes %}
+    <div class="mini" style="margin-top:10px">
+      {{ n.text }}
+      <div class="muted">{{ n.created_at.strftime('%b %d, %Y %H:%M') }}</div>
+    </div>
+  {% else %}
+    <p class="muted">No notifications yet.</p>
+  {% endfor %}
+</div>
+{% endblock %}

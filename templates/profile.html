@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %} - Profile{% endblock %}
+
+{% block content %}
+<div class="card" style="margin-top:22px">
+  <div class="row">
+    <div>
+      {% if user.profile_pic %}
+        <img class="profile-pic" src="{{ url_for('static', filename='uploads/' ~ user.profile_pic) }}">
+      {% else %}
+        <img class="profile-pic" src="{{ url_for('static', filename='default_profile.png') }}">
+      {% endif %}
+    </div>
+    <div>
+      <h1>@{{ user.username }}</h1>
+      <p class="muted">{{ user.bio or 'A Vibely member' }}</p>
+      <p class="muted">{{ user.followers|length }} followers · {{ user.following|length }} following</p>
+
+      {% if current_user.username == user.username %}
+        <a href="{{ url_for('edit_profile') }}" class="btn">Edit Profile</a>
+      {% else %}
+        <form method="post" action="{{ url_for('follow', username=user.username) }}" style="display:inline">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button class="btn" type="submit">Follow</button>
+        </form>
+
+        <form method="post" action="{{ url_for('unfollow', username=user.username) }}" style="display:inline;margin-left:8px">
+          <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+          <button class="btn alt" type="submit">Unfollow</button>
+        </form>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% for post in posts %}
+  <article class="post">
+    <strong>{{ post.created_at.strftime('%b %d, %Y') }}</strong>
+    <p>{{ post.text }}</p>
+
+    {% if post.media %}
+      {% if post.media_type == 'image' %}
+        <img class="media" src="{{ url_for('static', filename='uploads/' ~ post.media) }}">
+      {% else %}
+        <video class="media" controls>
+          <source src="{{ url_for('static', filename='uploads/' ~ post.media) }}">
+        </video>
+      {% endif %}
+    {% endif %}
+  </article>
+{% endfor %}
+{% endblock %}

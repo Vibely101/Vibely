@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %} - Register{% endblock %}
+{% block content %}
+<div class="auth">
+  <div class="card">
+    <h1>Create Vibely</h1>
+    <p class="muted">Join the bright social space.</p>
+
+    <form method="post">
+      {{ form.hidden_tag() }}
+      <p>{{ form.username.label }}<br>{{ form.username(class_='input', placeholder='Choose username') }}</p>
+      <p>{{ form.email.label }}<br>{{ form.email(class_='input', placeholder='Enter email') }}</p>
+      <p>{{ form.password.label }}<br>{{ form.password(class_='input', placeholder='Create password') }}</p>
+      <p>{{ form.confirm.label }}<br>{{ form.confirm(class_='input', placeholder='Confirm password') }}</p>
+      <p>{{ form.submit(class_='btn') }}</p>
+    </form>
+
+    <p class="muted">Already have an account? <a href="{{ url_for('login') }}">Login</a></p>
+  </div>
+</div>
+{% endblock %}

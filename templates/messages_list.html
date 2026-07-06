@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %} - Messages{% endblock %}
+{% block content %}
+<div class="card" style="margin-top:22px">
+  <h1>Messages</h1>
+  <div class="list">
+    {% for user in users %}
+      <a class="mini" href="{{ url_for('messages', username=user.username) }}">@{{ user.username }}</a>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

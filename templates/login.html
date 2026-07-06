@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block title %} - Login{% endblock %}
+{% block content %}
+<div class="auth">
+  <div class="card">
+    <h1>Welcome to Vibely</h1>
+    <p class="muted">Connect, share, and vibe with people.</p>
+
+    <form method="post">
+      {{ form.hidden_tag() }}
+      <p>{{ form.email.label }}<br>{{ form.email(class_='input', placeholder='Enter email') }}</p>
+      <p>{{ form.password.label }}<br>{{ form.password(class_='input', placeholder='Enter password') }}</p>
+      <p><a class="muted" href="{{ url_for('forgot_password') }}">Forgot password?</a></p>
+      <p>{{ form.submit(class_='btn') }}</p>
+    </form>
+
+    <p class="muted">No account? <a href="{{ url_for('register') }}">Create one</a></p>
+  </div>
+</div>
+{% endblock %}

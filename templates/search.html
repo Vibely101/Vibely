@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %} - Search{% endblock %}
+{% block content %}
+<div class="card" style="margin-top:22px">
+  <h1>Search</h1>
+
+  <form method="get">
+    <input class="input" name="q" value="{{ q }}" placeholder="Search users or posts">
+    <div class="topspace"></div>
+    <button class="btn" type="submit">Search</button>
+  </form>
+
+  <div class="split" style="margin-top:18px">
+    <div>
+      <h3>Users</h3>
+      {% for user in users %}
+        <a class="mini" href="{{ url_for('profile', username=user.username) }}">@{{ user.username }}</a>
+      {% else %}
+        <p class="muted">No users found.</p>
+      {% endfor %}
+    </div>
+
+    <div>
+      <h3>Posts</h3>
+      {% for post in posts %}
+        <div class="mini">@{{ post.author.username }}: {{ post.text }}</div>
+      {% else %}
+        <p class="muted">No posts found.</p>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

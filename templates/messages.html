@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %} - Messages{% endblock %}
+{% block content %}
+<div class="card" style="margin-top:22px">
+  <h1>Chat with @{{ user.username }}</h1>
+
+  <div class="list">
+    {% for chat in chats %}
+      <div class="mini">
+        <strong>{% if chat.sender_id == current_user.id %}You{% else %}@{{ user.username }}{% endif %}</strong>
+        {{ chat.text }}
+      </div>
+    {% endfor %}
+  </div>
+
+  <form method="post" style="margin-top:14px">
+    {{ form.hidden_tag() }}
+    {{ form.text(class_='textarea', placeholder='Write a message') }}
+    <div class="topspace"></div>
+    {{ form.submit(class_='btn') }}
+  </form>
+</div>
+{% endblock %}

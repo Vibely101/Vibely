@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %} - Explore{% endblock %}
+{% block content %}
+<div class="hero">
+  <h1>Explore Vibely</h1>
+  <p class="muted">Discover what people are sharing right now.</p>
+</div>
+
+{% for post in posts %}
+  <article class="post">
+    <div class="row">
+      <div class="avatar"></div>
+      <div>
+        <strong>@{{ post.author.username }}</strong>
+        <div class="muted">{{ post.created_at.strftime('%b %d, %Y %H:%M') }}</div>
+      </div>
+    </div>
+
+    <p>{{ post.text }}</p>
+
+    {% if post.media %}
+      {% if post.media_type == 'image' %}
+        <img class="media" src="{{ url_for('static', filename='uploads/' ~ post.media) }}">
+      {% else %}
+        <video class="media" controls>
+          <source src="{{ url_for('static', filename='uploads/' ~ post.media) }}">
+        </video>
+      {% endif %}
+    {% endif %}
+  </article>
+{% endfor %}
+{% endblock %}
