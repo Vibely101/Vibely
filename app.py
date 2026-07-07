@@ -18,7 +18,7 @@ load_dotenv()
 
 basedir = Path(__file__).resolve().parent
 
-app = Flask(_name_)
+app = Flask(__name__)
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "change-this-secret-key")
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + str(basedir / "vibely.db")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
