@@ -18,7 +18,7 @@ load_dotenv()
 
 basedir = Path(__file__).resolve().parent
 
-app = Flask(__name__)
+app = Flask(_name_)
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "change-this-secret-key")
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + str(basedir / "vibely.db")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
@@ -29,9 +29,9 @@ app.config["MAIL_SERVER"] = "smtp.gmail.com"
 app.config["MAIL_PORT"] = 587
 app.config["MAIL_USE_TLS"] = True
 app.config["MAIL_USE_SSL"] = False
-app.config["MAIL_USERNAME"] = "qevra101@gmail.com"
+app.config["MAIL_USERNAME"] = os.environ.get("MAIL_USERNAME")
 app.config["MAIL_PASSWORD"] = os.environ.get("MAIL_PASSWORD")
-app.config["MAIL_DEFAULT_SENDER"] = "qevra101@gmail.com"
+app.config["MAIL_DEFAULT_SENDER"] = os.environ.get("MAIL_USERNAME")
 
 csrf = CSRFProtect(app)
 db = SQLAlchemy(app)
