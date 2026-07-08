@@ -25,13 +25,13 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["UPLOAD_FOLDER"] = str(basedir / "static" / "uploads")
 app.config["MAX_CONTENT_LENGTH"] = 20 * 1024 * 1024
 
-app.config["MAIL_SERVER"] = "smtp.gmail.com"
+app.config["MAIL_SERVER"] = "smtp.sendgrid.net"
 app.config["MAIL_PORT"] = 587
 app.config["MAIL_USE_TLS"] = True
 app.config["MAIL_USE_SSL"] = False
-app.config["MAIL_USERNAME"] = os.environ.get("MAIL_USERNAME")
-app.config["MAIL_PASSWORD"] = os.environ.get("MAIL_PASSWORD")
-app.config["MAIL_DEFAULT_SENDER"] = os.environ.get("MAIL_DEFAULT_SENDER")
+app.config["MAIL_USERNAME"] = "acdd539fc0f4c1d5ca2f61f256a5888c"
+app.config["MAIL_PASSWORD"] = os.environ.get("SENDGRID_API_KEY")
+app.config["MAIL_DEFAULT_SENDER"] = "qevra101@gmail.com"
 
 
 csrf = CSRFProtect(app)
