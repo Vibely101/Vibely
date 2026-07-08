@@ -208,7 +208,16 @@ def add_notification(user_id, actor_id, type_, text, post_id=None):
 
 def send_reset_email(user):
     token = user.get_reset_token()
-    print(f"reset token for {user.email}: {token}")
+    msg = Message(
+        "Password Reset Request",
+        recipients=[user.email]
+    )
+    msg.body = f"""To reset your password, visit the following link:
+{url_for('reset_token', token=token, _external=True)}
+
+If you did not make this request, ignore this email.
+"""
+    mail.send(msg)
 
 
 
