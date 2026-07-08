@@ -30,7 +30,7 @@ app.config["MAIL_PORT"] = 587
 app.config["MAIL_USE_TLS"] = True
 app.config["MAIL_USE_SSL"] = False
 app.config["MAIL_USERNAME"] = "apikey"
-app.config["MAIL_PASSWORD"] = os.environ.get("SENDGRID_API_KEY")
+app.config["MAIL_PASSWORD"] = os.environ.get("acdd539fc0f4c1d5ca2f61f256a5888c")
 app.config["MAIL_DEFAULT_SENDER"] = "qevra101@gmail.com"
 
 
@@ -213,7 +213,7 @@ def send_reset_email(user):
         recipients=[user.email]
     )
     msg.body = f"""To reset your password, visit the following link:
-{url_for('reset_token', token=token, _external=True)}
+{url_for('reset_password', token=token, _external=True)}
 
 If you did not make this request, ignore this email.
 """
