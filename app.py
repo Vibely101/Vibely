@@ -19,7 +19,7 @@ load_dotenv()
 basedir = Path(__file__).resolve().parent
 
 app = Flask(__name__)
-app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "change-this-secret-key")
+app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///" + str(basedir / "vibely.db")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["UPLOAD_FOLDER"] = str(basedir / "static" / "uploads")
@@ -30,8 +30,8 @@ app.config["MAIL_PORT"] = 587
 app.config["MAIL_USE_TLS"] = True
 app.config["MAIL_USE_SSL"] = False
 app.config["MAIL_USERNAME"] = "apikey"
-app.config["MAIL_PASSWORD"] = os.environ.get("acdd539fc0f4c1d5ca2f61f256a5888c")
-app.config["MAIL_DEFAULT_SENDER"] = "qevra101@gmail.com"
+app.config["MAIL_PASSWORD"] = os.environ.get("SENDGRID_API_KEY")
+app.config["MAIL_DEFAULT_SENDER"] = os.environ.get("qevra101@gmail.com")
 
 
 csrf = CSRFProtect(app)
