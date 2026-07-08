@@ -29,9 +29,9 @@ app.config["MAIL_SERVER"] = "smtp.gmail.com"
 app.config["MAIL_PORT"] = 587
 app.config["MAIL_USE_TLS"] = True
 app.config["MAIL_USE_SSL"] = False
-app.config["MAIL_USERNAME"] = os.environ.get("MAIL_USERNAME")
+app.config["qevra101@gmail.com"] = os.environ.get("MAIL_USERNAME")
 app.config["MAIL_PASSWORD"] = os.environ.get("MAIL_PASSWORD")
-app.config["MAIL_DEFAULT_SENDER"] = os.environ.get("MAIL_USERNAME")
+app.config["qevra101@gmail.com"] = os.environ.get("MAIL_USERNAME")
 
 csrf = CSRFProtect(app)
 db = SQLAlchemy(app)
@@ -208,16 +208,13 @@ def add_notification(user_id, actor_id, type_, text, post_id=None):
 
 def send_reset_email(user):
     token = user.get_reset_token()
-    link = url_for("reset_password", token=token, _external=True)
     msg = Message(
-        subject="Vibely Password Reset",
-        recipients=[user.email],
+        "Password Reset Request",
+
         sender=app.config["MAIL_DEFAULT_SENDER"]
     )
-    msg.body = f"""To reset your password, visit this link:
-
-{link}
-
+    msg.body = f"""To reset your password, visit:
+    Url
 If you did not make this request, ignore this email.
 """
     mail.send(msg)
