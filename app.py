@@ -206,19 +206,10 @@ def add_notification(user_id, actor_id, type_, text, post_id=None):
     db.session.add(note)
     return note
 
-
 def send_reset_email(user):
     token = user.get_reset_token()
-    msg = Message(
-        "Password Reset Request",
+    print(f"reset token for {user.email}: {token}")
 
-        sender=app.config["MAIL_DEFAULT_SENDER"]
-    )
-    msg.body = f"""To reset your password, visit:
-    Url
-If you did not make this request, ignore this email.
-"""
-    mail.send(msg)
 
 
 @app.context_processor
